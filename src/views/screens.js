@@ -3,6 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Splash from './Splash';
 import MainDashboard from './MainDashboard'
 import MainSystem from './MainSystem'
+import ServerPercentage from './ServerPercentage'
 
 
 const LoadingNavigator = createStackNavigator({
@@ -27,10 +28,11 @@ const LoadingNavigator = createStackNavigator({
 const AppNavigator = createStackNavigator(
     {
         MainDashboard,
-        MainSystem
+        MainSystem,
+        ServerPercentage
     },
     {
-        initialRouteName: "MainDashboard",
+        initialRouteName: "ServerPercentage",
         headerMode: 'screen'
     }
 );
@@ -41,7 +43,7 @@ const RootNavigator = createSwitchNavigator({
     AppNavigator,
     // WorkSpaceNavigator
 }, {
-    initialRouteName: "LoadingNavigator",
+    initialRouteName: "AppNavigator",
     headerMode: 'none',
     navigationOptions: {
         gesturesEnabled: false,

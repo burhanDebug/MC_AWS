@@ -7,7 +7,7 @@ import { Thumbnail } from 'native-base';
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 
-export default class MainDashboard extends React.Component {
+export default class MainSystem extends React.Component {
     static navigationOptions = {
         header: null,
     };
