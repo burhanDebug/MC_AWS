@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Dimensions, ScrollView, Text } from 'react-native'
+import { StyleSheet, View, Dimensions, ScrollView, Text, TouchableOpacity  } from 'react-native'
 import MenuView from '../../components/common/MenuView';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList} from 'react-native-gesture-handler';
 import ServerList from '../../components/common/ServerList';
 import { Thumbnail } from 'native-base';
 
@@ -16,7 +16,7 @@ export default class MainSystem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            
         }
 
     }
@@ -24,8 +24,10 @@ export default class MainSystem extends React.Component {
     renderServer = (item) => {
         return (
             // console.log("HELLO",item),
-            <ServerList
-                item={item.item} />
+           
+            <ServerList item={item.item}
+            onPress={()=>{this.props.navigation.navigate("Alarm")}}/>
+           
             //alert(item.item.serverName)
         );
     }
@@ -34,11 +36,11 @@ export default class MainSystem extends React.Component {
     render() {
         let Servers = [];
         Servers = [
-            { index: "1", serverName: "Server 1" },
-            { index: "2", serverName: "Server 2" },
-            { index: "3", serverName: "Server 3" },
-            { index: "4", serverName: "Server 4" },
-            { index: "5", serverName: "Server 5" },
+            { index: "1", serverName: "Server 1", selected:false },
+            { index: "2", serverName: "Server 2", selected:true },
+            { index: "3", serverName: "Server 3", selected:false },
+            { index: "4", serverName: "Server 4", selected:true },
+            { index: "5", serverName: "Server 5", selected:false },
             // { index: "6", serverName: "Server 6" },
             // { index: "7", serverName: "Server 7" },
             // { index: "8", serverName: "Server 8" },
@@ -49,17 +51,20 @@ export default class MainSystem extends React.Component {
             <View style={{ flex: 1, backgroundColor: "#262626" }}>
                 <View style={{ flex: 0.15, flexDirection: "row", alignItems: "center", paddingHorizontal:10 }}>
                     <View style={{ flex: 1, borderColor: "#ffd200", borderBottomWidth: 5, }}>
-                        <Text style={{ fontSize: 22, color: "#FFFFFF", alignSelf: "center", fontFamily: "Assistant-Bold", fontWeight: "bold", paddingVertical: 20 }}>Main System</Text>
+                        <Text style={{ fontSize: 20, color: "#FFFFFF", alignSelf: "center", fontFamily: "Assistant-Bold", fontWeight: "bold", paddingVertical: 20 }}>Main System</Text>
                     </View>
                     <View style={{ flex: 1, borderColor: "#FFFFFF", borderBottomWidth: 1, }}>
-                        <Text style={{ fontSize: 22, color: "#FFFFFF", alignSelf: "center", fontFamily: "Assistant-Bold", paddingVertical: 20 }}>Delivery</Text>
+                        <TouchableOpacity onPress={()=>{this.props.navigation.navigate("ServerPercentage")}}>
+                        <Text style={{ fontSize: 20, color: "#FFFFFF", alignSelf: "center", fontFamily: "Assistant-Bold", paddingVertical: 20 }}>Delivery</Text>
+                    </TouchableOpacity>
                     </View>
                 </View>
                 <View style={{ flex: 0.85, paddingHorizontal: 10,}}>
-                    <ScrollView>
+                    <ScrollView showsVerticalScrollIndicator={false}>
                     <Text style={{ fontSize: 18, color: "#FFFFFF", alignSelf: "center", fontFamily: "Assistant-Bold", paddingVertical: 20 }}>Tap to turn on/off server</Text>
                     <FlatList
                         data={Servers}
+                        extraData={Servers}
                         numColumns={3}
                         keyExtractor={(item) => item.index}
                         renderItem={this.renderServer}
