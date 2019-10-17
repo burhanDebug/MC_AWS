@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Dimensions, ScrollView, Text, TouchableOpacity } from 'react-native'
+import { View, Dimensions, ScrollView, Text, TouchableOpacity, Modal } from 'react-native'
 import { Thumbnail, Card, CardItem, Left, Right, Body, Content, Icon, Accordion } from 'native-base';
 import styles from './styles';
 
@@ -24,20 +24,19 @@ export default class Alarm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			updating:false
 		}
 	}
 
-	buttonPressed() {
-		alert("add button pressed")
-		//dataArray.push({title:"new", content:"05:00-06:00"})
+	buttonPressed=()=> {
+		this.setState({updating: true})
+	
 	}
 
 	_renderHeader(item, expanded) {
 		//console.log("item", item)
 		return (
-			<View>
-			{expanded ?
-			<View style={styles.SelectedHeaderContainer}>
+			<View style={expanded ? styles.SelectedHeaderContainer : styles.HeaderContainer}>
 				<View style={styles.rowStyle}>
 					<View style={{ flex: 1 }}>
 						<Text style={styles.TextStyle}>
@@ -60,9 +59,9 @@ export default class Alarm extends React.Component {
 									Servers
                         </Text>
 							</View>
-							<View style={{ flex: 0.4, borderBottomColor: "#FFFFFF", borderBottomWidth: 1, flexDirection: "row" }}>
-								<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white" }}>
-									{/* {item.content.Server} */}
+							<View style={{ flex: 0.4, borderBottomColor: "#FFFFFF", borderBottomWidth: 1, flexDirection: "row",justifyContent:"center"  }}>
+								<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white",alignSelf:"center" }}>
+									{/* {item.content.Server} */}7
 								</Text>
 								<Icon type="MaterialCommunityIcons" color={"white"} name="account-box" fontSize={14} />
 
@@ -75,9 +74,9 @@ export default class Alarm extends React.Component {
 									Start
                         </Text>
 							</View>
-							<View style={{ flex: 0.4, borderBottomColor: "#FFFFFF", borderBottomWidth: 1, flexDirection: "row" }}>
-								<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white" }}>
-									{/* {item.content.Server} */}
+							<View style={{ flex: 0.4, borderBottomColor: "#FFFFFF", borderBottomWidth: 1, flexDirection: "row",justifyContent:"center" }}>
+								<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white",alignSelf:"center" }}>
+									{/* {item.content.Server} */}4
 								</Text>
 								<Icon type="MaterialCommunityIcons" color={"white"} name="account-box" fontSize={14} />
 
@@ -90,9 +89,9 @@ export default class Alarm extends React.Component {
 									End
                         </Text>
 							</View>
-							<View style={{ flex: 0.4, borderBottomColor: "#FFFFFF", borderBottomWidth: 1, flexDirection: "row" }}>
-								<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white" }}>
-									{/* {item.content.Server} */}
+							<View style={{ flex: 0.4, borderBottomColor: "#FFFFFF", borderBottomWidth: 1, flexDirection: "row",justifyContent:"center"  }}>
+								<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white",alignSelf:"center" }}>
+									{/* {item.content.Server} */}6
 								</Text>
 								<Icon type="MaterialCommunityIcons" color={"white"} name="account-box" fontSize={14} />
 
@@ -107,104 +106,20 @@ export default class Alarm extends React.Component {
 
 
 				<View style={{ flexDirection: "row", paddingVertical: 5 }}>
-					<View style={{ flex: 0.3, padding: 20, }}>
-						<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white" }}>Repeat</Text></View>
-					<View style={{ flex: 0.7, flexDirection: "row", justifyContent: "space-around", padding: 20, }}>
-						<Text style={styles.DayText}>S</Text>
-						<Text style={styles.DayText}>M</Text>
-						<Text style={styles.DayText}>T</Text>
-						<Text style={styles.DayText}>W</Text>
-						<Text style={styles.DayText}>T</Text>
-						<Text style={styles.DayText}>F</Text>
-						<Text style={styles.DayText}>S</Text>
+					<View style={{ flex: 0.22, padding: 20, }}>
+						<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white" }} numberOfLines={1}>Repeat</Text></View>
+					<View style={{ flex: 0.78, flexDirection: "row", justifyContent: "space-around", padding: 20, }}>
+						<TouchableOpacity><Text style={styles.DayText}>S</Text></TouchableOpacity>
+						<TouchableOpacity><Text style={styles.DayText}>M</Text></TouchableOpacity>
+						<TouchableOpacity><Text style={styles.DayText}>T</Text></TouchableOpacity>
+						<TouchableOpacity><Text style={styles.DayText}>W</Text></TouchableOpacity>
+						<TouchableOpacity><Text style={styles.DayText}>T</Text></TouchableOpacity>
+						<TouchableOpacity><Text style={styles.DayText}>F</Text></TouchableOpacity>
+						<TouchableOpacity><Text style={styles.DayText}>S</Text></TouchableOpacity>
 					</View>
 				</View>
 			</View>
-		:
-	<View style={styles.HeaderContainer}>
-				<View style={styles.rowStyle}>
-					<View style={{ flex: 1 }}>
-						<Text style={styles.TextStyle}>
-							{/* {item.content.Start} - {item.content.End} */}
-							{item.content}
-						</Text>
-					</View>
-					<View style={{ flex: 1 }}>
-						<Text style={styles.TextStyle}>
-							{item.title}
-						</Text>
-					</View>
-				</View>
 
-				{expanded ?
-					<View>
-						<View style={{ flex: 1, flexDirection: "row", paddingTop: 15 }}>
-							<View style={{ flex: 0.4, }}>
-								<Text style={styles.SubHeading}>
-									Servers
-                        </Text>
-							</View>
-							<View style={{ flex: 0.4, borderBottomColor: "#FFFFFF", borderBottomWidth: 1, flexDirection: "row" }}>
-								<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white" }}>
-									{/* {item.content.Server} */}
-								</Text>
-								<Icon type="MaterialCommunityIcons" color={"white"} name="account-box" fontSize={14} />
-
-							</View>
-						</View>
-
-						<View style={{ flex: 1, flexDirection: "row" }}>
-							<View style={{ flex: 0.4, }}>
-								<Text style={styles.SubHeading}>
-									Start
-                        </Text>
-							</View>
-							<View style={{ flex: 0.4, borderBottomColor: "#FFFFFF", borderBottomWidth: 1, flexDirection: "row" }}>
-								<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white" }}>
-									{/* {item.content.Server} */}
-								</Text>
-								<Icon type="MaterialCommunityIcons" color={"white"} name="account-box" fontSize={14} />
-
-							</View>
-						</View>
-
-						<View style={{ flex: 1, flexDirection: "row", marginBottom: 10 }}>
-							<View style={{ flex: 0.4, }}>
-								<Text style={styles.SubHeading}>
-									End
-                        </Text>
-							</View>
-							<View style={{ flex: 0.4, borderBottomColor: "#FFFFFF", borderBottomWidth: 1, flexDirection: "row" }}>
-								<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white" }}>
-									{/* {item.content.Server} */}
-								</Text>
-								<Icon type="MaterialCommunityIcons" color={"white"} name="account-box" fontSize={14} />
-
-							</View>
-						</View>
-
-
-					</View>
-					:
-					null
-				}
-
-
-				<View style={{ flexDirection: "row", paddingVertical: 5 }}>
-					<View style={{ flex: 0.3, padding: 20, }}>
-						<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white" }}>Repeat</Text></View>
-					<View style={{ flex: 0.7, flexDirection: "row", justifyContent: "space-around", padding: 20, }}>
-						<Text style={styles.DayText}>S</Text>
-						<Text style={styles.DayText}>M</Text>
-						<Text style={styles.DayText}>T</Text>
-						<Text style={styles.DayText}>W</Text>
-						<Text style={styles.DayText}>T</Text>
-						<Text style={styles.DayText}>F</Text>
-						<Text style={styles.DayText}>S</Text>
-					</View>
-				</View>
-			</View>}
-			</View>
 		);
 	}
 
@@ -212,7 +127,26 @@ export default class Alarm extends React.Component {
 
 	}
 
+	renderUpdating = () => {
+		//setTimeout(this.setState({updating: true}), 1000); 
+		return (
+			
+			<View style={{
+				flex: 1, justifyContent: 'center',
+				backgroundColor: 'rgba(100, 100, 100, 0.5)'
+				//backgroundColor: 'red'
+
+			}}>
+      <Thumbnail large style={{alignSelf:"center"}} source={require("../../assets/images/chips.png")}/>  
+		</View>
+			
+		)
+		
+	}
 	render() {
+		{this.state.updating? setTimeout(function () {
+			this.setState({ updating: false });
+		}.bind(this), 3000):null}
 		return (
 			<View style={styles.container}>
 				<View style={styles.HeaderBarView}>
@@ -222,11 +156,11 @@ export default class Alarm extends React.Component {
                             </Text>
 					</View>
 					<View style={styles.DeliveryHeaderBarLine}>
-					<TouchableOpacity onPress={()=>{this.props.navigation.navigate("ServerPercentage")}}>
-						<Text style={[styles.MainAndDeliveryText,{fontWeight:"normal"}]}>
-							Delivery
+						<TouchableOpacity onPress={() => { this.props.navigation.navigate("ServerPercentage") }}>
+							<Text style={[styles.MainAndDeliveryText, { fontWeight: "normal" }]}>
+								Delivery
                             </Text>
-														</TouchableOpacity>
+						</TouchableOpacity>
 					</View>
 				</View>
 				<View style={styles.scrollview}>
@@ -254,6 +188,12 @@ export default class Alarm extends React.Component {
 					</TouchableOpacity>
 
 				</View>
+				<Modal
+					animationType="slide"
+					transparent={true}
+					visible={this.state.updating}>
+					{this.renderUpdating()}
+				</Modal>
 			</View>
 		)
 	}
