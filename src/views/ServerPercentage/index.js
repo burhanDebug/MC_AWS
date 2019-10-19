@@ -46,14 +46,9 @@ export default class ServerPercentage extends React.Component {
 
         let ServersInfo = [];
         ServersInfo = [
-            {index: "1",Type:"All", iosNumber:"25",iosAmount:"25000",androidNumber:"35",androidAmount:"35000",webNumber:"45",webAmount:"45000",Total:"150",Amount:"15000"},
-            {index: "2",Type:"All1", iosNumber:"25",iosAmount:"25000",androidNumber:"35",androidAmount:"35000",webNumber:"45",webAmount:"45000",Total:"150",Amount:"15000"},
-            {index: "3",Type:"All2", iosNumber:"25",iosAmount:"25000",androidNumber:"35",androidAmount:"35000",webNumber:"45",webAmount:"45000",Total:"150",Amount:"15000"},
-            {index: "4",Type:"All3", iosNumber:"25",iosAmount:"25000",androidNumber:"35",androidAmount:"35000",webNumber:"45",webAmount:"45000",Total:"150",Amount:"15000"},
-            {index: "5",Type:"All4", iosNumber:"25",iosAmount:"25000",androidNumber:"35",androidAmount:"35000",webNumber:"45",webAmount:"45000",Total:"150",Amount:"15000"},
-            {index: "6",Type:"All5", iosNumber:"25",iosAmount:"25000",androidNumber:"35",androidAmount:"35000",webNumber:"45",webAmount:"45000",Total:"150",Amount:"15000"},
-            {index: "7",Type:"All6", iosNumber:"25",iosAmount:"25000",androidNumber:"35",androidAmount:"35000",webNumber:"45",webAmount:"45000",Total:"150",Amount:"15000"},
-
+            {index: "1", Type:"All", iosNumber:"25", iosAmount:"₪25,000", androidNumber:"35", androidAmount:"₪35,000", webNumber:"45", webAmount:"₪45,000", Total:"150", Amount:"₪15,000"},
+            {index: "2", Type:"Store 1", iosNumber:"25", iosAmount:"₪25,000", androidNumber:"35", androidAmount:"₪35,000", webNumber:"45", webAmount:"₪45,000", Total:"150", Amount:"₪15,000"},
+            {index: "3", Type:"Store 2", iosNumber:"25", iosAmount:"₪25,000", androidNumber:"35", androidAmount:"₪35,000", webNumber:"45", webAmount:"₪45,000", Total:"150", Amount:"₪15,000"},   
         ];
 
         return (
@@ -71,10 +66,8 @@ export default class ServerPercentage extends React.Component {
               onValueChange={this.onValueChange.bind(this)}
             >
               <Picker.Item label="All" value="key0" />
-              <Picker.Item label="All 1" value="key1" />
-              <Picker.Item label="All 2" value="key2" />
-              <Picker.Item label="All 3" value="key3" />
-              <Picker.Item label="All 4" value="key4" />
+              <Picker.Item label="Store 1" value="key1" />
+              <Picker.Item label="Store 2" value="key2" />
             </Picker>
           </Form>
 
@@ -110,27 +103,20 @@ export default class ServerPercentage extends React.Component {
                         </CardItem>
                     <CardItem style={{backgroundColor: "#262626",}}>
                         <Left style={{justifyContent:"center"}}>
-                            <Thumbnail square small source={require("../../assets/images/ios.png")}/>
+                            {/* <Thumbnail square small source={require("../../assets/images/ios.png")}/> */}
+                            <Icon name="android" type="MaterialIcons" style={{fontSize:46, color:"#FFFFFF"}}/>
                         </Left>
                         <Body style={{alignItems:"center"}}>
-                        <Thumbnail square small source={require("../../assets/images/android.png")}/>
+                        {/* <Thumbnail square small source={require("../../assets/images/android.png")}/> */}
+                        <Icon name="logo-apple" type="Ionicons" style={{fontSize:46, color:"#FFFFFF"}}/>
                         </Body>
                         <Right style={{alignItems:"center"}}>
-                        <Thumbnail square small source={require("../../assets/images/web.png")}/>
+                        {/* <Thumbnail square small source={require("../../assets/images/web.png")}/> */}
+                        <Icon name="monitor" type="Feather" style={{fontSize:46, color:"#FFFFFF"}}/>
                         </Right>
                     </CardItem>
                 </Card>
-                {/* <CardBox
-                Type={"All"}
-                iosNumber={"25"}
-                iosAmount={"25000"}
-                androidNumber={"35"}
-                androidAmount={"35000"}
-                webNumber={"45"}
-                webAmount={"45000"}
-                Total={"150"}
-                Amount={"15000"}/> */}
-                 <FlatList
+                    <FlatList
                         data={ServersInfo}
                         keyExtractor={(item) => item.index}
                         renderItem={this.renderServerInfo}

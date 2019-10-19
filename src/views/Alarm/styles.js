@@ -26,20 +26,28 @@ export default StyleSheet.create({
     },
 
     rowStyle:{
-        flexDirection: "row"
+        flexDirection: "row",
+        padding:10
     },
     TextStyle:{
         fontFamily: "Assistant-Bold", 
-        fontSize: 20, 
-        fontWeight: "bold", 
-        paddingHorizontal: 18, 
+        fontSize: 26, 
+        fontWeight: "normal", 
+       
         color: "white"
     },
-    DayText:{
+    TextStyleName:{
         fontFamily: "Assistant-Bold", 
-        fontSize: 18,  
-        justifyContent: "space-around", 
-        color: "white"
+        fontSize: 20, 
+        fontWeight: "bold", 
+        color: "white",
+        alignSelf:"center"
+    },
+    DayTextWeek:{
+        fontFamily: "Assistant-Bold", 
+        fontSize: 16, 
+        color: "white",
+     
     },
     HeaderBarView:{
         flex: 0.15, 
@@ -48,7 +56,7 @@ export default StyleSheet.create({
         paddingHorizontal: 10 
     },
     HeaderBarText:{
-        fontSize: 18, 
+        fontSize: 20, 
         color: "#FFFFFF", 
         alignSelf: "center", 
         fontFamily: "Assistant-Bold", 
@@ -89,10 +97,14 @@ export default StyleSheet.create({
         fontFamily: "Assistant-Bold", 
         fontSize: 18, 
         fontWeight: "bold", 
-        paddingHorizontal: 20, 
+        paddingHorizontal: 10, 
         color: "white",
         paddingVertical:10,
         
-    }
+    },
+    item: {
+        backgroundColor: '#262626',
+        borderRadius:100/2,
+    },
   });
   

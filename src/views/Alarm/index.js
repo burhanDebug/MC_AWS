@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, Dimensions, ScrollView, Text, TouchableOpacity, Modal } from 'react-native'
-import { Thumbnail, Card, CardItem, Left, Right, Body, Content, Icon, Accordion } from 'native-base';
+import React, { useState } from 'react';
+import { View, Dimensions, ScrollView, Text, TouchableOpacity, Modal, FlatList, Button } from 'react-native'
+import { Thumbnail, Icon, Accordion } from 'native-base';
 import styles from './styles';
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
@@ -12,9 +12,69 @@ const dataArray = [
 	{ title: "Server 4", content: "10:00 - 6:00" },
 	{ title: "Server 5", content: "10:00 - 6:00" },
 	{ title: "Server 6", content: "10:00 - 6:00" },
-
-
 ];
+
+const WEEK_DATA = [
+	{ id: 'Sunday', title: 'S' },
+	{ id: 'Monday', title: 'M' },
+	{ id: 'Tuesday', title: 'T' },
+	{ id: 'Wednesday', title: 'W' },
+	{ id: 'Thursday', title: 'T' },
+	{ id: 'Friday', title: 'F' },
+	{ id: 'Saturday', title: 'S' }
+];
+
+function Item({ id, title, selected, onSelect}) {
+	return (
+		
+		<TouchableOpacity 
+			onPress={() => onSelect(id)}
+			style={[
+				styles.item,
+				{ backgroundColor: selected ? '#e5ac00' : '#262626' },
+			]}
+		>
+			<View style={{alignSelf:"center",padding:5}}>
+			<Text style={[styles.DayTextWeek,{color:selected? '#262626':'#FFFFFF'}]}>{title}</Text>
+			</View>
+		</TouchableOpacity>
+		
+	);
+}
+
+
+function WEEK_ALARMS(props) {
+	const [selected, setSelected] = React.useState(new Map());
+
+	const onSelect = React.useCallback(
+		id => {
+			const newSelected = new Map(selected);
+			newSelected.set(id, !selected.get(id));
+
+			setSelected(newSelected);
+		},
+		[selected],
+	);
+	
+	return (
+		
+			<FlatList style={{flex:1,flexDirection:"row",justifyContent:"space-around",}}
+				data={WEEK_DATA}
+				renderItem={({ item }) => (
+					<Item
+						id={item.id}
+						title={item.title}
+						selected={!!selected.get(item.id)}
+						onSelect={onSelect}
+					/>
+				)}
+				keyExtractor={item => item.id}
+				extraData={selected}
+			/>
+			
+	
+	);
+}
 
 export default class Alarm extends React.Component {
 	static navigationOptions = {
@@ -24,17 +84,18 @@ export default class Alarm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			updating:false
+			updating: false
 		}
 	}
 
-	buttonPressed=()=> {
-		this.setState({updating: true})
-	
+	buttonPressed = () => {
+		this.setState({ updating: true })
+
 	}
 
 	_renderHeader(item, expanded) {
-		//console.log("item", item)
+
+		// //console.log("item", item)
 		return (
 			<View style={expanded ? styles.SelectedHeaderContainer : styles.HeaderContainer}>
 				<View style={styles.rowStyle}>
@@ -44,8 +105,8 @@ export default class Alarm extends React.Component {
 							{item.content}
 						</Text>
 					</View>
-					<View style={{ flex: 1 }}>
-						<Text style={styles.TextStyle}>
+					<View style={{ flex: 1,justifyContent:"center" }}>
+						<Text style={styles.TextStyleName}>
 							{item.title}
 						</Text>
 					</View>
@@ -54,46 +115,55 @@ export default class Alarm extends React.Component {
 				{expanded ?
 					<View>
 						<View style={{ flex: 1, flexDirection: "row", paddingTop: 15 }}>
-							<View style={{ flex: 0.4, }}>
+							<View style={{ flex: 0.3, }}>
 								<Text style={styles.SubHeading}>
-									Servers
+									Servers:
                         </Text>
 							</View>
-							<View style={{ flex: 0.4, borderBottomColor: "#FFFFFF", borderBottomWidth: 1, flexDirection: "row",justifyContent:"center"  }}>
-								<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white",alignSelf:"center" }}>
+							<View style={{ flex: 0.3, borderBottomColor: "#FFFFFF", borderBottomWidth: 1, flexDirection: "row", justifyContent: "center" }}>
+								<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white", alignSelf: "center" }}>
 									{/* {item.content.Server} */}7
 								</Text>
-								<Icon type="MaterialCommunityIcons" color={"white"} name="account-box" fontSize={14} />
+								
+							</View>
+							<View style={{ flex: 0.1, flexDirection: "row", justifyContent: "center" }}>
+							<Icon name="caretdown" type="AntDesign" style={{fontSize:16,alignSelf:"center", color:"#FFFFFF", marginLeft:-50}}/>
 
 							</View>
 						</View>
 
 						<View style={{ flex: 1, flexDirection: "row" }}>
-							<View style={{ flex: 0.4, }}>
+							<View style={{ flex: 0.3, }}>
 								<Text style={styles.SubHeading}>
-									Start
+									Start:
                         </Text>
 							</View>
-							<View style={{ flex: 0.4, borderBottomColor: "#FFFFFF", borderBottomWidth: 1, flexDirection: "row",justifyContent:"center" }}>
-								<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white",alignSelf:"center" }}>
+							<View style={{ flex: 0.3, borderBottomColor: "#FFFFFF", borderBottomWidth: 1, flexDirection: "row", justifyContent: "center" }}>
+								<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white", alignSelf: "center" }}>
 									{/* {item.content.Server} */}4
 								</Text>
-								<Icon type="MaterialCommunityIcons" color={"white"} name="account-box" fontSize={14} />
 
 							</View>
+							<View style={{ flex: 0.1, flexDirection: "row", justifyContent: "center" }}>
+							<Icon name="caretdown" type="AntDesign" style={{fontSize:16,alignSelf:"center", color:"#FFFFFF", marginLeft:-50}}/>
+
+							</View>
+
 						</View>
 
 						<View style={{ flex: 1, flexDirection: "row", marginBottom: 10 }}>
-							<View style={{ flex: 0.4, }}>
+							<View style={{ flex: 0.3, }}>
 								<Text style={styles.SubHeading}>
-									End
+									End:
                         </Text>
 							</View>
-							<View style={{ flex: 0.4, borderBottomColor: "#FFFFFF", borderBottomWidth: 1, flexDirection: "row",justifyContent:"center"  }}>
-								<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white",alignSelf:"center" }}>
+							<View style={{ flex: 0.3, borderBottomColor: "#FFFFFF", borderBottomWidth: 1, flexDirection: "row", justifyContent: "center" }}>
+								<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white", alignSelf: "center" }}>
 									{/* {item.content.Server} */}6
 								</Text>
-								<Icon type="MaterialCommunityIcons" color={"white"} name="account-box" fontSize={14} />
+							</View>
+							<View style={{ flex: 0.1, flexDirection: "row", justifyContent: "center" }}>
+							<Icon name="caretdown" type="AntDesign" style={{fontSize:16,alignSelf:"center", color:"#FFFFFF", marginLeft:-50}}/>
 
 							</View>
 						</View>
@@ -105,17 +175,11 @@ export default class Alarm extends React.Component {
 				}
 
 
-				<View style={{ flexDirection: "row", paddingVertical: 5 }}>
-					<View style={{ flex: 0.22, padding: 20, }}>
-						<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white" }} numberOfLines={1}>Repeat</Text></View>
-					<View style={{ flex: 0.78, flexDirection: "row", justifyContent: "space-around", padding: 20, }}>
-						<TouchableOpacity><Text style={styles.DayText}>S</Text></TouchableOpacity>
-						<TouchableOpacity><Text style={styles.DayText}>M</Text></TouchableOpacity>
-						<TouchableOpacity><Text style={styles.DayText}>T</Text></TouchableOpacity>
-						<TouchableOpacity><Text style={styles.DayText}>W</Text></TouchableOpacity>
-						<TouchableOpacity><Text style={styles.DayText}>T</Text></TouchableOpacity>
-						<TouchableOpacity><Text style={styles.DayText}>F</Text></TouchableOpacity>
-						<TouchableOpacity><Text style={styles.DayText}>S</Text></TouchableOpacity>
+				<View style={{flex:1, flexDirection: "row", paddingHorizontal:10 }}>
+					<View style={{ flex: 0.19, paddingVertical: 10, justifyContent:"center"}}>
+						<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white",}} numberOfLines={1}>Repeat:</Text></View>
+					<View style={{ flex: 0.81, flexDirection: "row",justifyContent:"flex-start", paddingVertical: 10,}}>
+						<WEEK_ALARMS />
 					</View>
 				</View>
 			</View>
@@ -130,23 +194,25 @@ export default class Alarm extends React.Component {
 	renderUpdating = () => {
 		//setTimeout(this.setState({updating: true}), 1000); 
 		return (
-			
+
 			<View style={{
 				flex: 1, justifyContent: 'center',
 				backgroundColor: 'rgba(100, 100, 100, 0.5)'
 				//backgroundColor: 'red'
 
 			}}>
-      <Thumbnail large style={{alignSelf:"center"}} source={require("../../assets/images/chips.png")}/>  
-		</View>
-			
+				<Thumbnail large style={{ alignSelf: "center" }} source={require("../../assets/images/chips.png")} />
+			</View>
+
 		)
-		
+
 	}
 	render() {
-		{this.state.updating? setTimeout(function () {
-			this.setState({ updating: false });
-		}.bind(this), 3000):null}
+		{
+			this.state.updating ? setTimeout(function () {
+				this.setState({ updating: false });
+			}.bind(this), 3000) : null
+		}
 		return (
 			<View style={styles.container}>
 				<View style={styles.HeaderBarView}>

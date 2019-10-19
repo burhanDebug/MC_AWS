@@ -12,20 +12,20 @@ const CardBox = props => (
         <View style={{ flex: 1, flexDirection: "row" }}>
 
             <View style={{ flex: 1 }}>
-                <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#FFFFFF', alignSelf: "center" }}>Ios</Text>
+                <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#FFFFFF', alignSelf: "center", fontWeight:"bold" }}>Ios</Text>
                 <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#ffd200', alignSelf: "center", marginTop: -10 }} numberOfLines={1}>__</Text>
                 <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#FFFFFF', alignSelf: "center" }}>{props.item.iosNumber}</Text>
                 <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#FFFFFF', alignSelf: "center" }}>{props.item.iosAmount}</Text>
             </View>
 
             <View style={{ flex: 1 }}>
-                <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#FFFFFF', alignSelf: "center" }}>Android</Text>
+                <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#FFFFFF', alignSelf: "center", fontWeight:"bold" }}>Android</Text>
                 <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#ffd200', alignSelf: "center", marginTop: -10 }} numberOfLines={1}>__</Text>
                 <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#FFFFFF', alignSelf: "center" }}>{props.item.androidNumber}</Text>
                 <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#FFFFFF', alignSelf: "center" }}>{props.item.androidAmount}</Text>
             </View>
             <View style={{ flex: 1 }}>
-                <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#FFFFFF', alignSelf: "center" }}>Web</Text>
+                <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#FFFFFF', alignSelf: "center", fontWeight:"bold" }}>Web</Text>
                 <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#ffd200', alignSelf: "center", marginTop: -10 }} numberOfLines={1}>__</Text>
                 <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#FFFFFF', alignSelf: "center" }}>{props.item.webNumber}</Text>
                 <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#FFFFFF', alignSelf: "center" }}>{props.item.webAmount}</Text>
@@ -40,11 +40,11 @@ const CardBox = props => (
 
 
             <View style={{ flex: 1, }}>
-            <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#FFFFFF', alignSelf: "center", paddingHorizontal:20 }}>{props.item.Total}</Text>
+            <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#FFFFFF', alignSelf: "center", paddingHorizontal:20, fontWeight:"bold" }}>{props.item.Total}</Text>
                 <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#FFFFFF', alignSelf: "center", paddingHorizontal:20 }}>Total</Text>
             </View>
             <View style={{ flex: 1 }}>
-                <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#FFFFFF', alignSelf: "center",}}>{props.item.Amount}</Text>
+                <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#FFFFFF', alignSelf: "center", fontWeight:"bold"}}>{props.item.Amount}</Text>
                 <Text style={{ fontFamily: "Assistant-Bold", fontSize: 16, color: '#FFFFFF', alignSelf: "center",}}>Amount</Text>
 
             </View>
