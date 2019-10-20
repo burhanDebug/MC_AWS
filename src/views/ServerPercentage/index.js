@@ -6,6 +6,10 @@ import { FlatList} from 'react-native-gesture-handler';
 
 import CardBox from '../../components/common/CardBox';
 
+//this.progressValue = props.animated ? props.progress._startingValue : props.progress;
+//replace this line in the library path: \MC_AWS\node_modules\react-native-progress\Circle.js inside the constructor
+//For Successful working of percenatge inside the circle
+
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 
 export default class ServerPercentage extends React.Component {
@@ -46,9 +50,9 @@ export default class ServerPercentage extends React.Component {
 
         let ServersInfo = [];
         ServersInfo = [
-            {index: "1", Type:"All", iosNumber:"25", iosAmount:"₪25,000", androidNumber:"35", androidAmount:"₪35,000", webNumber:"45", webAmount:"₪45,000", Total:"150", Amount:"₪15,000"},
-            {index: "2", Type:"Store 1", iosNumber:"25", iosAmount:"₪25,000", androidNumber:"35", androidAmount:"₪35,000", webNumber:"45", webAmount:"₪45,000", Total:"150", Amount:"₪15,000"},
-            {index: "3", Type:"Store 2", iosNumber:"25", iosAmount:"₪25,000", androidNumber:"35", androidAmount:"₪35,000", webNumber:"45", webAmount:"₪45,000", Total:"150", Amount:"₪15,000"},   
+            {index: "1", Type:"All", iosNumber:"25", iosAmount:"$25,000", androidNumber:"35", androidAmount:"$35,000", webNumber:"45", webAmount:"$45,000", Total:"150", Amount:"$15,000"},
+            {index: "2", Type:"Store 1", iosNumber:"25", iosAmount:"$25,000", androidNumber:"35", androidAmount:"$35,000", webNumber:"45", webAmount:"$45,000", Total:"150", Amount:"$15,000"},
+            {index: "3", Type:"Store 2", iosNumber:"25", iosAmount:"$25,000", androidNumber:"35", androidAmount:"$35,000", webNumber:"45", webAmount:"$45,000", Total:"150", Amount:"$15,000"},   
         ];
 
         return (

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Dimensions, ScrollView, Text, TouchableOpacity, Modal, FlatList, Button } from 'react-native'
-import { Thumbnail, Icon, Accordion } from 'native-base';
+import { Thumbnail, Icon, Accordion, Picker, Form } from 'native-base';
 import styles from './styles';
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
@@ -24,21 +24,21 @@ const WEEK_DATA = [
 	{ id: 'Saturday', title: 'S' }
 ];
 
-function Item({ id, title, selected, onSelect}) {
+function Item({ id, title, selected, onSelect }) {
 	return (
-		
-		<TouchableOpacity 
+
+		<TouchableOpacity
 			onPress={() => onSelect(id)}
 			style={[
 				styles.item,
 				{ backgroundColor: selected ? '#e5ac00' : '#262626' },
 			]}
 		>
-			<View style={{alignSelf:"center",padding:5}}>
-			<Text style={[styles.DayTextWeek,{color:selected? '#262626':'#FFFFFF'}]}>{title}</Text>
+			<View style={{ alignSelf: "center", padding: 5 }}>
+				<Text style={[styles.DayTextWeek, { color: selected ? '#262626' : '#FFFFFF' }]}>{title}</Text>
 			</View>
 		</TouchableOpacity>
-		
+
 	);
 }
 
@@ -55,24 +55,24 @@ function WEEK_ALARMS(props) {
 		},
 		[selected],
 	);
-	
+
 	return (
-		
-			<FlatList style={{flex:1,flexDirection:"row",justifyContent:"space-around",}}
-				data={WEEK_DATA}
-				renderItem={({ item }) => (
-					<Item
-						id={item.id}
-						title={item.title}
-						selected={!!selected.get(item.id)}
-						onSelect={onSelect}
-					/>
-				)}
-				keyExtractor={item => item.id}
-				extraData={selected}
-			/>
-			
-	
+
+		<FlatList style={{ flex: 1, flexDirection: "row", justifyContent: "space-around", }}
+			data={WEEK_DATA}
+			renderItem={({ item }) => (
+				<Item
+					id={item.id}
+					title={item.title}
+					selected={!!selected.get(item.id)}
+					onSelect={onSelect}
+				/>
+			)}
+			keyExtractor={item => item.id}
+			extraData={selected}
+		/>
+
+
 	);
 }
 
@@ -84,7 +84,8 @@ export default class Alarm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			updating: false
+			updating: false,
+			selectedValue: undefined
 		}
 	}
 
@@ -96,6 +97,7 @@ export default class Alarm extends React.Component {
 	_renderHeader(item, expanded) {
 
 		// //console.log("item", item)
+	
 		return (
 			<View style={expanded ? styles.SelectedHeaderContainer : styles.HeaderContainer}>
 				<View style={styles.rowStyle}>
@@ -105,7 +107,7 @@ export default class Alarm extends React.Component {
 							{item.content}
 						</Text>
 					</View>
-					<View style={{ flex: 1,justifyContent:"center" }}>
+					<View style={{ flex: 1, justifyContent: "center" }}>
 						<Text style={styles.TextStyleName}>
 							{item.title}
 						</Text>
@@ -120,15 +122,21 @@ export default class Alarm extends React.Component {
 									Servers:
                         </Text>
 							</View>
+							
 							<View style={{ flex: 0.3, borderBottomColor: "#FFFFFF", borderBottomWidth: 1, flexDirection: "row", justifyContent: "center" }}>
-								<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white", alignSelf: "center" }}>
-									{/* {item.content.Server} */}7
-								</Text>
-								
-							</View>
-							<View style={{ flex: 0.1, flexDirection: "row", justifyContent: "center" }}>
-							<Icon name="caretdown" type="AntDesign" style={{fontSize:16,alignSelf:"center", color:"#FFFFFF", marginLeft:-50}}/>
-
+								<Form style={{flex:1, alignSelf: "center", }}>
+									<Picker style={{ color: "#FFFFFF", }}
+										mode="dropdown"
+										placeholder="Select One"
+										iosIcon={<Icon name="arrow-down" style={{fontSize: 16, color: "#FFFFFF",}} />}
+										placeholderStyle={{ color: "#FFFFFF" }}
+										note={false}
+									>
+										<Picker.Item label="1" value="key0" />
+										<Picker.Item label="2" value="key1" />
+										<Picker.Item label="3" value="key2" />
+									</Picker>
+								</Form>
 							</View>
 						</View>
 
@@ -139,14 +147,20 @@ export default class Alarm extends React.Component {
                         </Text>
 							</View>
 							<View style={{ flex: 0.3, borderBottomColor: "#FFFFFF", borderBottomWidth: 1, flexDirection: "row", justifyContent: "center" }}>
-								<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white", alignSelf: "center" }}>
-									{/* {item.content.Server} */}4
-								</Text>
-
-							</View>
-							<View style={{ flex: 0.1, flexDirection: "row", justifyContent: "center" }}>
-							<Icon name="caretdown" type="AntDesign" style={{fontSize:16,alignSelf:"center", color:"#FFFFFF", marginLeft:-50}}/>
-
+								<Form style={{flex:1, alignSelf: "center", }}>
+									<Picker style={{ color: "#FFFFFF", }}
+										mode="dropdown"
+										placeholder="Select One"
+										iosIcon={<Icon name="arrow-down" style={{fontSize: 16, color: "#FFFFFF",}} />}
+										placeholderStyle={{ color: "#FFFFFF" }}
+										note={false}
+									
+									>
+										<Picker.Item label="1" value="key0" />
+										<Picker.Item label="2" value="key1" />
+										<Picker.Item label="3" value="key2" />
+									</Picker>
+								</Form>
 							</View>
 
 						</View>
@@ -158,13 +172,19 @@ export default class Alarm extends React.Component {
                         </Text>
 							</View>
 							<View style={{ flex: 0.3, borderBottomColor: "#FFFFFF", borderBottomWidth: 1, flexDirection: "row", justifyContent: "center" }}>
-								<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white", alignSelf: "center" }}>
-									{/* {item.content.Server} */}6
-								</Text>
-							</View>
-							<View style={{ flex: 0.1, flexDirection: "row", justifyContent: "center" }}>
-							<Icon name="caretdown" type="AntDesign" style={{fontSize:16,alignSelf:"center", color:"#FFFFFF", marginLeft:-50}}/>
-
+								<Form style={{flex:1, alignSelf: "center", }}>
+									<Picker style={{ color: "#FFFFFF", }}
+										mode="dropdown"
+										placeholder="Select One"
+										iosIcon={<Icon name="arrow-down" style={{fontSize: 16, color: "#FFFFFF",}} />}
+										placeholderStyle={{ color: "#FFFFFF" }}
+										note={false}
+									>
+										<Picker.Item label="1" value="key0" />
+										<Picker.Item label="2" value="key1" />
+										<Picker.Item label="3" value="key2" />
+									</Picker>
+								</Form>
 							</View>
 						</View>
 
@@ -175,10 +195,10 @@ export default class Alarm extends React.Component {
 				}
 
 
-				<View style={{flex:1, flexDirection: "row", paddingHorizontal:10 }}>
-					<View style={{ flex: 0.19, paddingVertical: 10, justifyContent:"center"}}>
-						<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white",}} numberOfLines={1}>Repeat:</Text></View>
-					<View style={{ flex: 0.81, flexDirection: "row",justifyContent:"flex-start", paddingVertical: 10,}}>
+				<View style={{ flex: 1, flexDirection: "row", paddingHorizontal: 10 }}>
+					<View style={{ flex: 0.19, paddingVertical: 10, justifyContent: "center" }}>
+						<Text style={{ fontFamily: "Assistant-Bold", fontSize: 18, fontWeight: "bold", color: "white", }} numberOfLines={1}>Repeat:</Text></View>
+					<View style={{ flex: 0.81, flexDirection: "row", justifyContent: "flex-start", paddingVertical: 10, }}>
 						<WEEK_ALARMS />
 					</View>
 				</View>
